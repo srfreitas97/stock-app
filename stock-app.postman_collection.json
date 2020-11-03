@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "3b8c68b7-a61e-41f6-9145-c34726826ad5",
+		"name": "stock-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/Products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Products"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 03 Nov 2020 16:48:23 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Iphone 12\",\n            \"amount\": 500,\n            \"unitPrice\": 2999.99\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Mouse\",\n            \"amount\": 12,\n            \"unitPrice\": 199.9\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Headset\",\n            \"amount\": 25,\n            \"unitPrice\": 249.99\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Mousepad\",\n            \"amount\": 100,\n            \"unitPrice\": 89.9\n        },\n        {\n            \"id\": 6,\n            \"name\": \"USB cable\",\n            \"amount\": 100,\n            \"unitPrice\": 9.9\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Charger\",\n            \"amount\": 10,\n            \"unitPrice\": 19.9\n        },\n        {\n            \"id\": 8,\n            \"name\": \"Galaxy Note 10\",\n            \"amount\": 100,\n            \"unitPrice\": 2999.99\n        }\n    ],\n    \"status\": 200,\n    \"message\": \"Products retrieved.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "POST Products",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Id\": 1,\r\n    \"Name\": \"Iphone 12\",\r\n    \"Amount\": 500,\r\n    \"UnitPrice\": 2999.99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Products"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Name\": \"Iphone 12\",\r\n    \"Amount\": 500,\r\n    \"UnitPrice\": 2999.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Products",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Products"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 03 Nov 2020 16:48:14 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Location",
+							"value": "https://localhost:5001/Products"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"name\": \"Iphone 12\",\n        \"amount\": 500,\n        \"unitPrice\": 2999.99\n    },\n    \"status\": 201,\n    \"message\": \"Product created.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "PUT Products",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":8,\r\n    \"name\": \"Galaxy Note 10\",\r\n    \"amount\": 100,\r\n    \"unitPrice\": 2999.99\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/Products/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Products",
+						"8"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":8,\r\n    \"name\": \"Galaxy Note 10\",\r\n    \"amount\": 100,\r\n    \"unitPrice\": 2999.99\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/Products/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Products",
+								"8"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 03 Nov 2020 16:42:24 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 8,\n        \"name\": \"Galaxy Note 10\",\n        \"amount\": 100,\n        \"unitPrice\": 2999.99\n    },\n    \"status\": 200,\n    \"message\": \"Product updated.\"\n}"
+				}
+			]
+		},
+		{
+			"name": "DELETE Products",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/Products/8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"Products",
+						"8"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "NOT_FOUND",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/Products/8",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Products",
+								"8"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 03 Nov 2020 16:30:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": 404,\n    \"message\": \"Product not found for the given id.\"\n}"
+				},
+				{
+					"name": "SUCCESS",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/Products/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"Products",
+								"7"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 03 Nov 2020 17:37:04 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Server",
+							"value": "Kestrel"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 7,\n        \"name\": \"Charger\",\n        \"amount\": 10,\n        \"unitPrice\": 19.9\n    },\n    \"status\": 200,\n    \"message\": \"Product deleted.\"\n}"
+				}
+			]
+		}
+	],
+	"protocolProfileBehavior": {}
+}
