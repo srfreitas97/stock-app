@@ -35,7 +35,7 @@ namespace stock_app.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProducts([FromRoute] int id,[FromBody] Product product)
+        public async Task<IActionResult> UpdateProducts([FromRoute] int id, [FromBody] Product product)
         {
             return Ok(await _productsFacade.UpdateProductAsync(id, product));
         }

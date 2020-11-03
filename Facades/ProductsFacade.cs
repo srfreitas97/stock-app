@@ -5,7 +5,8 @@ using stock_app.Interfaces;
 using stock_app.Models;
 using stock_app.Models.Databases;
 using stock_app.Models.Entities;
-using System.Net;
+using stock_app.Exceptions;
+using Microsoft.AspNetCore.Http;
 
 namespace stock_app.Facades
 {
@@ -15,12 +16,15 @@ namespace stock_app.Facades
         private const string PRODUCTS_RETRIEVED = "Products retrieved.";
         private const string PRODUCT_DELETED = "Product deleted.";
         private const string PRODUCT_UPDATED = "Product updated.";
+        private const string VALIDATION_MESSAGE = "Id passed as parameter doesn't match product id.";
+        private const string DATABASE_ERROR_MESSAGE = "Error ocurred while adding product to the database.";
+        private const string PRODUCT_NOT_FOUND_MESSAGE = "Product not found for the given id.";
         private readonly StockContext _stockContext;
         private readonly ILogger _logger;
 
-        public ProductsFacade(StockContext stockContext)
+        public ProductsFacade(StockContext stockContext, ILogger<ProductsFacade> logger)
         {
-            //_logger = logger;
+            _logger = logger;
             _stockContext = stockContext;
         }
 
@@ -28,7 +32,7 @@ namespace stock_app.Facades
         {
             return new ResponseModel()
             {
-                Status = HttpStatusCode.OK,
+                Status = StatusCodes.Status200OK,
                 Message = PRODUCTS_RETRIEVED,
                 Data = _stockContext.Products
             };
@@ -37,23 +41,19 @@ namespace stock_app.Facades
         {
             var response = _stockContext.Products.Add(product);
 
-            if (response.State.Equals(EntityState.Added))
+            await _stockContext.SaveChangesAsync();
+            return new ResponseModel()
             {
-                await _stockContext.SaveChangesAsync();
-                return new ResponseModel()
-                {
-                    Status = HttpStatusCode.Created,
-                    Message = PRODUCT_CREATED,
-                    Data = product
-                };
-            }
+                Status = StatusCodes.Status201Created,
+                Message = PRODUCT_CREATED,
+                Data = product
+            };
 
-            throw new System.Exception();
+
         }
 
         public async Task<ResponseModel> UpdateProductAsync(int id, Product product)
         {
-
             if (id == product.Id)
             {
 
@@ -61,14 +61,16 @@ namespace stock_app.Facades
                 await _stockContext.SaveChangesAsync();
                 return new ResponseModel()
                 {
-                    Status = HttpStatusCode.OK,
+                    Status = StatusCodes.Status200OK,
                     Message = PRODUCT_UPDATED,
                     Data = product
                 };
+
             }
-
-            throw new System.Exception();
-
+            else
+            {
+                throw new BadRequestException(VALIDATION_MESSAGE);
+            }
 
         }
 
@@ -76,15 +78,22 @@ namespace stock_app.Facades
         {
 
             var product = await _stockContext.Products.FindAsync(id);
-            _stockContext.Remove(product);
-            await _stockContext.SaveChangesAsync();
-
-            return new ResponseModel()
+            if (product != null)
             {
-                Status = HttpStatusCode.OK,
-                Message = PRODUCT_DELETED,
-                Data = product
-            };
+                _stockContext.Remove(product);
+                await _stockContext.SaveChangesAsync();
+
+                return new ResponseModel()
+                {
+                    Status = StatusCodes.Status200OK,
+                    Message = PRODUCT_DELETED,
+                    Data = product
+                };
+            }
+            else
+            {
+                throw new ProductNotFoundException(PRODUCT_NOT_FOUND_MESSAGE, id);
+            }
 
         }
 

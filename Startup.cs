@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using stock_app.Facades;
 using stock_app.Interfaces;
+using stock_app.Middlewares;
 using stock_app.Models.Databases;
 
 namespace stock_app
@@ -29,21 +29,18 @@ namespace stock_app
             services.AddDbContext<StockContext>(options => 
                 options.UseSqlite("Data Source =Stock.db")
             );
-            // var options = new DbContextOptionsBuilder<StockContext>();
-            // var context = new StockContext(options.UseSqlite("Data Source =Stock.db").Options);
-            // services.AddSingleton(context);
             services.AddScoped<IProductsFacade, ProductsFacade>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            // if (env.IsDevelopment())
+            // {
+            //     app.UseDeveloperExceptionPage();
+            // }
 
-            app.UseExceptionHandler("/Error");
+            app.UseMiddleware<ErrorMiddleware>();
 
             app.UseHttpsRedirection();
 
